@@ -4,7 +4,6 @@ author: "AP"
 date: "Saturday, March 14, 2015"
 output: html_document
 ---
-#ACTIVITY MONITORING
 
 This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
 
@@ -57,7 +56,7 @@ median(stepsPerDay$steps, na.rm=TRUE)
 
 ```r
 stepsPerInterval <- ddply(data, .(interval), summarize, steps=mean(steps, na.rm=TRUE))
-with(stepsPerInterval, plot(interval, steps, type="l"))
+with(stepsPerInterval, plot(interval, steps, type="l", main="Mean Steps Taken Per Interval"))
 ```
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
@@ -142,7 +141,7 @@ filledData$weekdayOrWeekend <- as.factor(filledData$weekdayOrWeekend)
 stepsPerIntervalFilledData <- ddply(filledData, .(interval, weekdayOrWeekend), summarize, steps=mean(steps))
 
 g <- ggplot(stepsPerIntervalFilledData, aes(x=interval, y=steps))
-g + geom_line() + facet_grid(weekdayOrWeekend~.)
+g + geom_line() + facet_grid(weekdayOrWeekend~.) + labs(title="Mean steps per interval over weekdays and weekends")
 ```
 
 ![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11-1.png) 
